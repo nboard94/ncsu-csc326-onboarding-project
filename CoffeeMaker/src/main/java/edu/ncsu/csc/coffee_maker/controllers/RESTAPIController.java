@@ -70,6 +70,10 @@ public class RESTAPIController {
             final int change = Application.getCoffeeMaker().makeCoffee( recipe, amtPaid );
             System.out.println( "change: " + change );
 
+            // need to update inventory
+            final Inventory inventory = Application.getCoffeeMaker().getInventory();
+            inventoryService.updateInventory( inventory );
+
             return new ResponseEntity<String>( "{\"result\":\"success\", \"change\":" + change + "}", HttpStatus.OK );
         }
         catch ( final IllegalArgumentException e ) {
