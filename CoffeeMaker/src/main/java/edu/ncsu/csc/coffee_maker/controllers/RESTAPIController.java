@@ -74,6 +74,10 @@ public class RESTAPIController {
                 return new ResponseEntity( change, HttpStatus.CONFLICT );
             }
 
+            // need to update inventory
+            final Inventory inventory = Application.getCoffeeMaker().getInventory();
+            inventoryService.updateInventory( inventory );
+
             return new ResponseEntity<String>( "{\"result\":\"success\", \"change\":" + change + "}", HttpStatus.OK );
         }
         catch ( final IllegalArgumentException e ) {

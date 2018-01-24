@@ -166,7 +166,6 @@ public class CoffeeMaker {
                 return change;
             }
         }
-
         // Not enough money paid
         return change;
     }
