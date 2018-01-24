@@ -43,10 +43,11 @@
 			            },
 			            function(errResponse){
 			                console.error('Error while making recipe');
-			                deferred.reject(errResponse);
+			                deferred.resolve(errResponse.data);
 			                
 			                console.log(errResponse);
 						    $scope.submissionFailure=true;
+						    $scope.change = errResponse.data
 						    $scope.error = "Error while making recipe";
 			            }
 			        );
@@ -86,7 +87,7 @@
 			<div ng-show="submissionSuccess">Coffee was made. Your change
 				is {{change}}.</div>
 
-			<div ng-show="submissionFailure">An error occurred: {{error}}</div>
+			<div ng-show="submissionFailure">An error occurred: {{error}}. Your change is {{change}}</div>
 
 			<br /> <a href="/index">Home</a>
 		</div>
