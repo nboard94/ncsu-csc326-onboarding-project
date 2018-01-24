@@ -70,10 +70,6 @@ public class RESTAPIController {
             final int change = Application.getCoffeeMaker().makeCoffee( recipe, amtPaid );
             System.out.println( "change: " + change );
 
-            if ( amtPaid == change ) {
-                return new ResponseEntity( change, HttpStatus.CONFLICT );
-            }
-
             // need to update inventory
             final Inventory inventory = Application.getCoffeeMaker().getInventory();
             inventoryService.updateInventory( inventory );
