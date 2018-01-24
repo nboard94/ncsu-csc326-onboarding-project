@@ -27,7 +27,7 @@ public class AddRecipeTest extends SeleniumTest {
     protected void setUp () throws Exception {
         super.setUp();
 
-        driver = new HtmlUnitDriver(true);
+        driver = new HtmlUnitDriver( true );
         baseUrl = "http://localhost:8080";
         driver.manage().timeouts().implicitlyWait( 10, TimeUnit.SECONDS );
 
@@ -40,6 +40,72 @@ public class AddRecipeTest extends SeleniumTest {
         // Enter the recipe information
         driver.findElement( By.name( "name" ) ).clear();
         driver.findElement( By.name( "name" ) ).sendKeys( "Coffee" );
+        driver.findElement( By.name( "price" ) ).clear();
+        driver.findElement( By.name( "price" ) ).sendKeys( "50" );
+        driver.findElement( By.name( "coffee" ) ).clear();
+        driver.findElement( By.name( "coffee" ) ).sendKeys( "3" );
+        driver.findElement( By.name( "milk" ) ).clear();
+        driver.findElement( By.name( "milk" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "sugar" ) ).clear();
+        driver.findElement( By.name( "sugar" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "chocolate" ) ).clear();
+        driver.findElement( By.name( "chocolate" ) ).sendKeys( "0" );
+
+        // Submit the recipe.
+        driver.findElement( By.cssSelector( "input[type=\"submit\"]" ) ).click();
+    }
+
+    private void addRecipeHelper2 () {
+        driver.get( baseUrl );
+        driver.findElement( By.linkText( "Add a Recipe" ) ).click();
+
+        // Enter the recipe information
+        driver.findElement( By.name( "name" ) ).clear();
+        driver.findElement( By.name( "name" ) ).sendKeys( "Latte" );
+        driver.findElement( By.name( "price" ) ).clear();
+        driver.findElement( By.name( "price" ) ).sendKeys( "50" );
+        driver.findElement( By.name( "coffee" ) ).clear();
+        driver.findElement( By.name( "coffee" ) ).sendKeys( "3" );
+        driver.findElement( By.name( "milk" ) ).clear();
+        driver.findElement( By.name( "milk" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "sugar" ) ).clear();
+        driver.findElement( By.name( "sugar" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "chocolate" ) ).clear();
+        driver.findElement( By.name( "chocolate" ) ).sendKeys( "0" );
+
+        // Submit the recipe.
+        driver.findElement( By.cssSelector( "input[type=\"submit\"]" ) ).click();
+    }
+
+    private void addRecipeHelper3 () {
+        driver.get( baseUrl );
+        driver.findElement( By.linkText( "Add a Recipe" ) ).click();
+
+        // Enter the recipe information
+        driver.findElement( By.name( "name" ) ).clear();
+        driver.findElement( By.name( "name" ) ).sendKeys( "Mocha" );
+        driver.findElement( By.name( "price" ) ).clear();
+        driver.findElement( By.name( "price" ) ).sendKeys( "50" );
+        driver.findElement( By.name( "coffee" ) ).clear();
+        driver.findElement( By.name( "coffee" ) ).sendKeys( "3" );
+        driver.findElement( By.name( "milk" ) ).clear();
+        driver.findElement( By.name( "milk" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "sugar" ) ).clear();
+        driver.findElement( By.name( "sugar" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "chocolate" ) ).clear();
+        driver.findElement( By.name( "chocolate" ) ).sendKeys( "0" );
+
+        // Submit the recipe.
+        driver.findElement( By.cssSelector( "input[type=\"submit\"]" ) ).click();
+    }
+
+    private void addRecipeHelper4 () {
+        driver.get( baseUrl );
+        driver.findElement( By.linkText( "Add a Recipe" ) ).click();
+
+        // Enter the recipe information
+        driver.findElement( By.name( "name" ) ).clear();
+        driver.findElement( By.name( "name" ) ).sendKeys( "Iced coffee" );
         driver.findElement( By.name( "price" ) ).clear();
         driver.findElement( By.name( "price" ) ).sendKeys( "50" );
         driver.findElement( By.name( "coffee" ) ).clear();
@@ -80,6 +146,22 @@ public class AddRecipeTest extends SeleniumTest {
     public void testAddRecipe2 () throws Exception {
         addRecipeHelper();
 
+        assertTrue( driver.getPageSource().contains( "Error while adding recipe." ) );
+    }
+
+    /**
+     * addRecipe4 Test for adding a fourth recipe. Expect to get an appropriate
+     * error message.
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void testAddRecipe4 () throws Exception {
+        addRecipeHelper2();
+        addRecipeHelper3();
+        assertTrue( driver.getPageSource().contains( "Recipe Created" ) );
+
+        addRecipeHelper4();
         assertTrue( driver.getPageSource().contains( "Error while adding recipe." ) );
     }
 
