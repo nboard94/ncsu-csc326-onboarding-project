@@ -125,7 +125,9 @@ public class RESTAPIController {
                     HttpStatus.CONFLICT );
         }
         try {
-            Application.getCoffeeMaker().getRecipeBook().addRecipe( recipe );
+            if ( !Application.getCoffeeMaker().getRecipeBook().addRecipe( recipe ) ) {
+                throw new IllegalArgumentException();
+            }
             return new ResponseEntity<String>( "{\"result\":\"success\"}", HttpStatus.OK );
         }
         catch ( final Exception e ) {
