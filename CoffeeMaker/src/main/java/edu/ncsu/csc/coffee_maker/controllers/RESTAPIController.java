@@ -70,6 +70,10 @@ public class RESTAPIController {
             final int change = Application.getCoffeeMaker().makeCoffee( recipe, amtPaid );
             System.out.println( "change: " + change );
 
+            if ( amtPaid == change ) {
+                return new ResponseEntity( change, HttpStatus.CONFLICT );
+            }
+
             return new ResponseEntity<String>( "{\"result\":\"success\", \"change\":" + change + "}", HttpStatus.OK );
         }
         catch ( final IllegalArgumentException e ) {
