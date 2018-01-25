@@ -171,6 +171,43 @@ public class MakeCoffeeTest extends SeleniumTest {
     }
 
     /**
+     * Non-numeric input
+     *
+     * @throws Exception
+     */
+    private void makeCoffee ( final String recipeName, final int price, final int amtCoffee, final int amtMilk,
+            final int amtSugar, final int amtChocolate, final String paid, final String expectedMessage )
+            throws Exception {
+        createRecipe( recipeName, price, amtCoffee, amtMilk, amtSugar, amtChocolate );
+
+        driver.get( baseUrl + "" );
+        driver.findElement( By.linkText( "Make Coffee" ) ).click();
+
+        selectRecipe( recipeName );
+
+        try {
+            driver.findElement( By.name( "amtPaid" ) ).clear();
+            driver.findElement( By.name( "amtPaid" ) ).sendKeys( paid + "" );
+        }
+        catch ( final Exception e ) {
+            System.out.println( driver.getCurrentUrl() );
+            System.out.println( driver.getPageSource() );
+            Assert.fail();
+        }
+
+        // Submit
+        System.out.println( recipeName + " " + price + " " + amtCoffee + " " + amtMilk + " " + " " + amtSugar + " "
+                + amtChocolate + " " + paid + " " + expectedMessage );
+        driver.findElement( By.cssSelector( "input[type=\"submit\"]" ) ).click();
+        Thread.sleep( 5000 );
+
+        // Make sure the proper message was displayed.
+        final String src = driver.getPageSource();
+        Assert.assertTrue( src.contains( expectedMessage ) );
+
+    }
+
+    /**
      * Test for making coffee (valid) Expect to get an appropriate success
      * message.
      *
@@ -200,6 +237,17 @@ public class MakeCoffeeTest extends SeleniumTest {
         makeInvalidCoffee( "Coffee", 5, 2, 3, 4, 2, 5.5, "Non-Integer Value Entered." );
         makeInvalidCoffee( "Coffee", 5, 2, 3, 4, 2, -1, "Non-Integer Value Entered." );
         makeInvalidCoffee( "Coffee", 5, 2, 3, 4, 2, 4, "Insufficient Funds." );
+    }
+
+    /**
+     * Test for making coffee (invalid). Expect to get an appropriate failure
+     * message
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testInvalidMakeCoffee2 () throws Exception {
+        makeCoffee( "Coffee", 60, 0, 3, 7, 2, "a", "Error while making recipe" );
     }
 
     @Override
