@@ -553,7 +553,7 @@ public class AddRecipeTest extends SeleniumTest {
 
     /**
      * addRecipe15 Test for adding a fourth recipe. Expect to get an appropriate
-     * error message
+     * error message.
      *
      * @throws Exception
      */
