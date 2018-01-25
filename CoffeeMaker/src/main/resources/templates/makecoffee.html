@@ -28,6 +28,11 @@
 				$scope.submissionFailure=false;
 				$scope.submissionSuccess=false;
 				$scope.submissionBadFunds=false;
+				$scope.submissionNonInt=false;
+				
+				if(amtPaid !== parseInt(amtPaid, 10)) {
+                	$scope.submissionNonInt=true;
+                }
 				
 				/* $http.get("/api/v1/recipes/" + name).then(function(response) {
 					console.log(response);
@@ -40,8 +45,10 @@
 			            function (response) {
 			                deferred.resolve(response.data);
 			                $scope.change = response.data.change;
-			                if($scope.change == amtPaid) {
-			                	$scope.submissionBadFunds=true;
+			                if($scope.submissionNonInt == true) {
+			                	$scope.change = amtPaid;
+			                } else if($scope.change == amtPaid) {
+			                   	$scope.submissionBadFunds=true;
 			                } else {
 			                	$scope.submissionSuccess=true;	
 			                }
@@ -94,6 +101,8 @@
 			<div ng-show="submissionFailure">An error occurred: {{error}}.</div>
 			
 			<div ng-show="submissionBadFunds">Insufficient Funds. Your change is {{change}}</div>
+			
+			<div ng-show="submissionNonInt">Non-Integer Value Entered. Your change is {{change}}</div>
 
 			<br /> <a href="/index">Home</a>
 		</div>
