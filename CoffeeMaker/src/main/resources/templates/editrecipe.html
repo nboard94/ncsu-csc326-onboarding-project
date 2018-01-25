@@ -35,7 +35,7 @@
 		<script> 
 	    /*<![CDATA[*/
 			var app = angular.module('myApp', []);
-			app.controller('recipesCtrl', function($scope, $http, $q) {
+			app.controller('editController', function($scope, $http, $q) {
 				
 				function updateRecipes() {
 					$http.get("/api/v1/recipes").then(function (response) {
@@ -91,7 +91,8 @@
 		
 		
 		<div class="generic-container"
-		ng-controller="AddRecipeController as ctrl">
+		ng-app="myApp"
+		ng-controller="editController as ctrl">
 		<div class="panel panel-default">
 			<div class="panel-heading"> 
 				<span class="lead">Edit a Recipe</span> 
@@ -102,8 +103,10 @@
 						class="form-horizontal">
 	
 						<div class="row">
-						<label class="col-md-2 control-lable" for="file">Choose recipe to edit:</label>
-						<div ng-app="myApp" ng-controller="recipesCtrl">
+						<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="file">Recipe to Edit</label>
+						<div class="col-md-7">
+						<div ng-app="myApp" ng-controller="editController">
 							<ul>
 								<li ng-repeat="recipe in recipes"><label>{{recipe.name}}
 								<input type="radio" ng-model="$parent.name" name="name"
@@ -114,6 +117,8 @@
 						<div ng-if="0 >= recipes.length">There are no recipes in the
 							Coffee Maker.</div>
 						<div ng-if="submissionSuccess">Recipe edited successfully</div>
+						</div>
+						</div>
 						</div>
 
 					</div>
