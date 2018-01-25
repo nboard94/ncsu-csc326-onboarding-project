@@ -75,8 +75,9 @@
 			</ul>
 			<br /> <input type="checkbox" name="all" class="checkbox"
 				ng-model="deleteAll">Delete all recipes?</input> <input
-				type="submit" value="Delete" ng-click="del()"
-				ng-if="recipes.length > 0" />
+				type="submit" value="Delete" id="delbtn" ng-click="del()"
+				ng-if="recipes.length >= 0" />
+
 
 			<div ng-if="0 >= recipes.length">There are no recipes in the
 				Coffee Maker.</div>

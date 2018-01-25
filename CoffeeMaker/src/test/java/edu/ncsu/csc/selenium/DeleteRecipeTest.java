@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
@@ -50,10 +51,24 @@ public class DeleteRecipeTest extends SeleniumTest {
     }
 
     /**
+     * Tests delete button shows.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void deleteButton () throws Exception {
+
+        final WebElement btn = driver.findElement( By.id( "delbtn" ) );
+        assertTrue( btn.isDisplayed() );
+
+    }
+
+    /**
      * Tests deleting a recipe.
      *
      * @throws Exception
      */
+    @Test
     public void delete () throws Exception {
         driver.get( baseUrl + "" );
         driver.findElement( By.linkText( "Delete Recipe" ) ).click();
@@ -74,6 +89,7 @@ public class DeleteRecipeTest extends SeleniumTest {
      *
      * @throws Exception
      */
+    @Test
     public void add () throws Exception {
         driver.get( baseUrl + "" );
         driver.findElement( By.linkText( "Add a Recipe" ) ).click();
