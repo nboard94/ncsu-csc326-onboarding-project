@@ -9,9 +9,7 @@ angular.module('myApp').factory('EditRecipeService', ['$http', '$q', function($h
     };
  
     return factory;
- 
     
-	
     function editRecipe(recipe) {
         var deferred = $q.defer();
         $http.post(REST_SERVICE_URI, recipe)

@@ -153,9 +153,7 @@ public class RESTAPIController {
      */
     @PostMapping ( BASE_PATH + "/recipes/edit" )
     public ResponseEntity editRecipe ( @RequestBody final Recipe recipe ) {
-
         try {
-
             if ( null == Application.getCoffeeMaker().getRecipeBook().editRecipe( recipe.getId() - 1, recipe ) ) {
                 return new ResponseEntity( "Recipe with the name " + recipe.getName() + " does not exist",
                         HttpStatus.CONFLICT );
@@ -166,7 +164,6 @@ public class RESTAPIController {
             return new ResponseEntity( "Insufficient space in recipe book for recipe " + recipe.getName(),
                     HttpStatus.INSUFFICIENT_STORAGE );
         }
-
     }
 
     /**

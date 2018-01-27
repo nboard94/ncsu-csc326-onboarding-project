@@ -7,14 +7,12 @@ angular.module('myApp').controller('EditRecipeController', ['$scope', 'EditRecip
     self.submit = submit;
     self.reset = reset;
     
-
     function updateRecipes() {
 		$http.get('/api/v1/recipes').then(function (response) {
 				$scope.recipes = response.data;
 			});
 	}
     
-   
     updateRecipes();
   
     $scope.fillValues = function() {
@@ -26,7 +24,6 @@ angular.module('myApp').controller('EditRecipeController', ['$scope', 'EditRecip
         }
         console.log(self.recipe);
     }
-    
     
     function editRecipe(recipe){
     		$scope.success = false;
@@ -51,7 +48,6 @@ angular.module('myApp').controller('EditRecipeController', ['$scope', 'EditRecip
         reset();
     }
  	
- 
     function reset(){
     		self.recipe={name:'', price:'', coffee:'', milk:'', sugar:'', chocolate:''};
         $scope.editRecipeForm.$setPristine(); //reset Form
