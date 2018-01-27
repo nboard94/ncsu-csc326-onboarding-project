@@ -22,12 +22,15 @@
 .email.ng-dirty.ng-invalid-required {
 	background-color: red;
 }
+[ng\.cloak], [ng-class], ng-cloak {
+	display: none;
+}
 </style>
 <link rel="stylesheet" href="css/bootstrap.css" />
 <link rel="stylesheet" href="css/app.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
+<body ng-app="myApp" class="ng-cloak">
 	<div layout:fragment="content">	
 		<div class="generic-container"
 		ng-app="myApp"
@@ -174,6 +177,7 @@
 				</form>
 			</div>
 			<div ng-show="success">Recipe Edited</div>
+			<div ng-show="failure">Error while editing recipe</div>
 		</div>
 
 		<a href="/index">Home</a>

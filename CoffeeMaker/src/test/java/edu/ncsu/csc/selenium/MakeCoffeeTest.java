@@ -225,6 +225,20 @@ public class MakeCoffeeTest extends SeleniumTest {
     }
 
     /**
+     * Testing if inventory gets updating after making valid coffee
+     */
+    @Test
+    public void testInventory () throws Exception {
+        makeCoffee( "Coffee", 6, 6, 6, 6, 6, 6, "Coffee was made" );
+        driver.findElement( By.linkText( "Home" ) ).click();
+        driver.findElement( By.linkText( "Update Inventory" ) ).click();
+        System.out.println(
+                driver.findElement( By.xpath( "//span[@id='currentCoffee']" ) ).getText() + "!!!!!!!!!!!!!!!!!" );
+        assertTrue( driver.findElement( By.xpath( "//span[@id='currentCoffee']" ) ).getText().equals( "9" ) );
+
+    }
+
+    /**
      * Test for making coffee (invalid) Expect to get an appropriate failure
      * message
      *
