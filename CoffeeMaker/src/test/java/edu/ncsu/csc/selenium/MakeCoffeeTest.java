@@ -137,6 +137,19 @@ public class MakeCoffeeTest extends SeleniumTest {
     }
 
     /**
+     * Testing if inventory gets updating after making valid coffee
+     */
+
+    @Test
+    public void testInventory () throws Exception {
+        makeCoffee( "Coffee", 6, 6, 6, 6, 6, 6, "Coffee was made" );
+        driver.findElement( By.linkText( "Home" ) ).click();
+        driver.findElement( By.linkText( "Update Inventory" ) ).click();
+
+        assertTrue( driver.findElement( By.xpath( "//span[@id='currentCoffee']" ) ).getText().equals( "9" ) );
+    }
+
+    /**
      * Create invalid coffee
      */
     private void makeInvalidCoffee ( final String recipeName, final int price, final int amtCoffee, final int amtMilk,
@@ -223,19 +236,6 @@ public class MakeCoffeeTest extends SeleniumTest {
         makeCoffee( "Coffee", 60, 5, 3, 7, 2, 100, "Coffee was made" );
         makeCoffee( "Coffee", 60, 5, 3, 7, 2, 61, "Coffee was made" );
     }
-
-    /**
-     * Testing if inventory gets updating after making valid coffee
-     */
-    /*
-     * @Test public void testInventory () throws Exception { makeCoffee(
-     * "Coffee", 6, 6, 6, 6, 6, 6, "Coffee was made" ); driver.findElement(
-     * By.linkText( "Home" ) ).click(); driver.findElement( By.linkText(
-     * "Update Inventory" ) ).click(); System.out.println( driver.findElement(
-     * By.xpath( "//span[@id='currentCoffee']" ) ).getText() +
-     * "!!!!!!!!!!!!!!!!!" ); assertTrue( driver.findElement( By.xpath(
-     * "//span[@id='currentCoffee']" ) ).getText().equals( "9" ) ); }
-     */
 
     /**
      * Test for making coffee (invalid) Expect to get an appropriate failure
