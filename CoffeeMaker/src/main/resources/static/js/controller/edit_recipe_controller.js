@@ -15,18 +15,17 @@ angular.module('myApp').controller('EditRecipeController', ['$scope', 'EditRecip
 	}
     
    
-    
     updateRecipes();
   
-    $scope.$watch('ctrl.selectedRecipe', function(value) {
-        console.log(value);
+    $scope.fillValues = function() {
+        console.log($scope.ctrl.selectedRecipe);
         for (var i = 0, len = $scope.recipes.length; i < len; i++) {
-			if(value === $scope.recipes[i].name) {
+			if($scope.ctrl.selectedRecipe === $scope.recipes[i].name) {
 				self.recipe = $scope.recipes[i];
         	}
         }
         console.log(self.recipe);
-    });
+    }
     
     
     function editRecipe(recipe){

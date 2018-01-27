@@ -2,7 +2,7 @@
  
 angular.module('myApp').factory('EditRecipeService', ['$http', '$q', function($http, $q){
  
-	var REST_SERVICE_URI = '/api/v1/recipes';
+	var REST_SERVICE_URI = '/api/v1/recipes/edit';
 	
     var factory = {
     		editRecipe: editRecipe,
@@ -20,7 +20,7 @@ angular.module('myApp').factory('EditRecipeService', ['$http', '$q', function($h
                 deferred.resolve(response.data);
             },
             function(errResponse){
-                console.error('Error while adding recipe');
+                console.error('Error while editing recipe');
                 deferred.reject(errResponse);
             }
         );
