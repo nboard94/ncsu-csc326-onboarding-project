@@ -45,7 +45,7 @@
 							<div class="col-md-7">
 								<ul>
 									<li ng-repeat="recipe in recipes"><label>{{recipe.name}}
-									<input type="radio" ng-model="$parent.name" name="name" value="{{recipe.name}}" required="true" />
+									<input type="radio" ng-model="ctrl.selectedRecipe" name="name" value="{{recipe.name}}" required="true" />
 									</label></li>
 								</ul>
 								<div ng-if="0 >= recipes.length">There are no recipes in the Coffee Maker.</div>
