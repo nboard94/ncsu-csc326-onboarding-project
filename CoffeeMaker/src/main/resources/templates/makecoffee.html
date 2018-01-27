@@ -30,7 +30,7 @@
 				$scope.submissionBadFunds=false;
 				$scope.submissionNonInt=false;
 				
-				if(amtPaid !== parseInt(amtPaid, 10)) {
+				if(amtPaid != parseInt(amtPaid, 10)) {
                 	$scope.submissionNonInt=true;
                 }
 				
