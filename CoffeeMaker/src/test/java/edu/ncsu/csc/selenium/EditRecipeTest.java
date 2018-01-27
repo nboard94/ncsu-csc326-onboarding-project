@@ -214,6 +214,223 @@ public class EditRecipeTest extends SeleniumTest {
         Assert.assertTrue( src.contains( "Error while editing recipe" ) );
     }
 
+    /**
+     * Invalid edit. Decimal coffee
+     */
+    @Test
+    public void testInvalidRecipe3 () throws Exception {
+        driver.get( baseUrl + "" );
+        driver.findElement( By.linkText( "Edit a Recipe" ) ).click();
+
+        selectRecipe( "Coffee" );
+        // Enter the recipe information
+        driver.findElement( By.name( "name" ) ).clear();
+        driver.findElement( By.name( "name" ) ).sendKeys( "Coffee" );
+        driver.findElement( By.name( "price" ) ).clear();
+        driver.findElement( By.name( "price" ) ).sendKeys( "6" );
+        driver.findElement( By.name( "coffee" ) ).clear();
+        driver.findElement( By.name( "coffee" ) ).sendKeys( "6.5" );
+        driver.findElement( By.name( "milk" ) ).clear();
+        driver.findElement( By.name( "milk" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "sugar" ) ).clear();
+        driver.findElement( By.name( "sugar" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "chocolate" ) ).clear();
+        driver.findElement( By.name( "chocolate" ) ).sendKeys( "0" );
+
+        // Submit the recipe.
+        driver.findElement( By.cssSelector( "input[type=\"submit\"]" ) ).click();
+
+        // Make sure the proper message was displayed.
+        final String src = driver.getPageSource();
+        Assert.assertTrue( src.contains( "Error while editing recipe" ) );
+    }
+
+    /**
+     * Invalid edit. Non-numeric milk
+     */
+    @Test
+    public void testInvalidRecipe4 () throws Exception {
+        driver.get( baseUrl + "" );
+        driver.findElement( By.linkText( "Edit a Recipe" ) ).click();
+
+        selectRecipe( "Coffee" );
+        // Enter the recipe information
+        driver.findElement( By.name( "name" ) ).clear();
+        driver.findElement( By.name( "name" ) ).sendKeys( "Coffee" );
+        driver.findElement( By.name( "price" ) ).clear();
+        driver.findElement( By.name( "price" ) ).sendKeys( "6" );
+        driver.findElement( By.name( "coffee" ) ).clear();
+        driver.findElement( By.name( "coffee" ) ).sendKeys( "6" );
+        driver.findElement( By.name( "milk" ) ).clear();
+        driver.findElement( By.name( "milk" ) ).sendKeys( "a" );
+        driver.findElement( By.name( "sugar" ) ).clear();
+        driver.findElement( By.name( "sugar" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "chocolate" ) ).clear();
+        driver.findElement( By.name( "chocolate" ) ).sendKeys( "0" );
+
+        // Submit the recipe.
+        driver.findElement( By.cssSelector( "input[type=\"submit\"]" ) ).click();
+
+        // Make sure the proper message was displayed.
+        final String src = driver.getPageSource();
+        Assert.assertTrue( src.contains( "Error while editing recipe" ) );
+    }
+
+    /**
+     * Invalid edit. Decimal milk
+     */
+    @Test
+    public void testInvalidRecipe5 () throws Exception {
+        driver.get( baseUrl + "" );
+        driver.findElement( By.linkText( "Edit a Recipe" ) ).click();
+
+        selectRecipe( "Coffee" );
+        // Enter the recipe information
+        driver.findElement( By.name( "name" ) ).clear();
+        driver.findElement( By.name( "name" ) ).sendKeys( "Coffee" );
+        driver.findElement( By.name( "price" ) ).clear();
+        driver.findElement( By.name( "price" ) ).sendKeys( "6" );
+        driver.findElement( By.name( "coffee" ) ).clear();
+        driver.findElement( By.name( "coffee" ) ).sendKeys( "6" );
+        driver.findElement( By.name( "milk" ) ).clear();
+        driver.findElement( By.name( "milk" ) ).sendKeys( "1.2" );
+        driver.findElement( By.name( "sugar" ) ).clear();
+        driver.findElement( By.name( "sugar" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "chocolate" ) ).clear();
+        driver.findElement( By.name( "chocolate" ) ).sendKeys( "0" );
+
+        // Submit the recipe.
+        driver.findElement( By.cssSelector( "input[type=\"submit\"]" ) ).click();
+
+        // Make sure the proper message was displayed.
+        final String src = driver.getPageSource();
+        Assert.assertTrue( src.contains( "Error while editing recipe" ) );
+    }
+
+    /**
+     * Invalid edit. Non-numeric sugar
+     */
+    @Test
+    public void testInvalidRecipe6 () throws Exception {
+        driver.get( baseUrl + "" );
+        driver.findElement( By.linkText( "Edit a Recipe" ) ).click();
+
+        selectRecipe( "Coffee" );
+        // Enter the recipe information
+        driver.findElement( By.name( "name" ) ).clear();
+        driver.findElement( By.name( "name" ) ).sendKeys( "Coffee" );
+        driver.findElement( By.name( "price" ) ).clear();
+        driver.findElement( By.name( "price" ) ).sendKeys( "6" );
+        driver.findElement( By.name( "coffee" ) ).clear();
+        driver.findElement( By.name( "coffee" ) ).sendKeys( "6" );
+        driver.findElement( By.name( "milk" ) ).clear();
+        driver.findElement( By.name( "milk" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "sugar" ) ).clear();
+        driver.findElement( By.name( "sugar" ) ).sendKeys( "a" );
+        driver.findElement( By.name( "chocolate" ) ).clear();
+        driver.findElement( By.name( "chocolate" ) ).sendKeys( "0" );
+
+        // Submit the recipe.
+        driver.findElement( By.cssSelector( "input[type=\"submit\"]" ) ).click();
+
+        // Make sure the proper message was displayed.
+        final String src = driver.getPageSource();
+        Assert.assertTrue( src.contains( "Error while editing recipe" ) );
+    }
+
+    /**
+     * Invalid edit. Decimal sugar
+     */
+    @Test
+    public void testInvalidRecipe7 () throws Exception {
+        driver.get( baseUrl + "" );
+        driver.findElement( By.linkText( "Edit a Recipe" ) ).click();
+
+        selectRecipe( "Coffee" );
+        // Enter the recipe information
+        driver.findElement( By.name( "name" ) ).clear();
+        driver.findElement( By.name( "name" ) ).sendKeys( "Coffee" );
+        driver.findElement( By.name( "price" ) ).clear();
+        driver.findElement( By.name( "price" ) ).sendKeys( "6" );
+        driver.findElement( By.name( "coffee" ) ).clear();
+        driver.findElement( By.name( "coffee" ) ).sendKeys( "6" );
+        driver.findElement( By.name( "milk" ) ).clear();
+        driver.findElement( By.name( "milk" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "sugar" ) ).clear();
+        driver.findElement( By.name( "sugar" ) ).sendKeys( "1.2" );
+        driver.findElement( By.name( "chocolate" ) ).clear();
+        driver.findElement( By.name( "chocolate" ) ).sendKeys( "0" );
+
+        // Submit the recipe.
+        driver.findElement( By.cssSelector( "input[type=\"submit\"]" ) ).click();
+
+        // Make sure the proper message was displayed.
+        final String src = driver.getPageSource();
+        Assert.assertTrue( src.contains( "Error while editing recipe" ) );
+    }
+
+    /**
+     * Invalid edit. Non-numeric chocolate
+     */
+    @Test
+    public void testInvalidRecipe8 () throws Exception {
+        driver.get( baseUrl + "" );
+        driver.findElement( By.linkText( "Edit a Recipe" ) ).click();
+
+        selectRecipe( "Coffee" );
+        // Enter the recipe information
+        driver.findElement( By.name( "name" ) ).clear();
+        driver.findElement( By.name( "name" ) ).sendKeys( "Coffee" );
+        driver.findElement( By.name( "price" ) ).clear();
+        driver.findElement( By.name( "price" ) ).sendKeys( "6" );
+        driver.findElement( By.name( "coffee" ) ).clear();
+        driver.findElement( By.name( "coffee" ) ).sendKeys( "6" );
+        driver.findElement( By.name( "milk" ) ).clear();
+        driver.findElement( By.name( "milk" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "sugar" ) ).clear();
+        driver.findElement( By.name( "sugar" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "chocolate" ) ).clear();
+        driver.findElement( By.name( "chocolate" ) ).sendKeys( "a" );
+
+        // Submit the recipe.
+        driver.findElement( By.cssSelector( "input[type=\"submit\"]" ) ).click();
+
+        // Make sure the proper message was displayed.
+        final String src = driver.getPageSource();
+        Assert.assertTrue( src.contains( "Error while editing recipe" ) );
+    }
+
+    /**
+     * Invalid edit. Decimal chocolate
+     */
+    @Test
+    public void testInvalidRecipe9 () throws Exception {
+        driver.get( baseUrl + "" );
+        driver.findElement( By.linkText( "Edit a Recipe" ) ).click();
+
+        selectRecipe( "Coffee" );
+        // Enter the recipe information
+        driver.findElement( By.name( "name" ) ).clear();
+        driver.findElement( By.name( "name" ) ).sendKeys( "Coffee" );
+        driver.findElement( By.name( "price" ) ).clear();
+        driver.findElement( By.name( "price" ) ).sendKeys( "6" );
+        driver.findElement( By.name( "coffee" ) ).clear();
+        driver.findElement( By.name( "coffee" ) ).sendKeys( "6" );
+        driver.findElement( By.name( "milk" ) ).clear();
+        driver.findElement( By.name( "milk" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "sugar" ) ).clear();
+        driver.findElement( By.name( "sugar" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "chocolate" ) ).clear();
+        driver.findElement( By.name( "chocolate" ) ).sendKeys( "1.2" );
+
+        // Submit the recipe.
+        driver.findElement( By.cssSelector( "input[type=\"submit\"]" ) ).click();
+
+        // Make sure the proper message was displayed.
+        final String src = driver.getPageSource();
+        Assert.assertTrue( src.contains( "Error while editing recipe" ) );
+    }
+
     @Override
     @After
     public void tearDown () throws Exception {

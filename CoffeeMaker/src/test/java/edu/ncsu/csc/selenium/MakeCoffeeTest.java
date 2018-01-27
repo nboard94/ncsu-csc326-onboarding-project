@@ -142,11 +142,16 @@ public class MakeCoffeeTest extends SeleniumTest {
 
     @Test
     public void testInventory () throws Exception {
+        driver.get( baseUrl + "" );
+        driver.findElement( By.linkText( "Update Inventory" ) ).click();
+        final String before = driver.findElement( By.xpath( "//span[@id='currentCoffee']" ) ).getText();
+
         makeCoffee( "Coffee", 6, 6, 6, 6, 6, 6, "Coffee was made" );
         driver.findElement( By.linkText( "Home" ) ).click();
         driver.findElement( By.linkText( "Update Inventory" ) ).click();
+        final String after = driver.findElement( By.xpath( "//span[@id='currentCoffee']" ) ).getText();
 
-        assertTrue( driver.findElement( By.xpath( "//span[@id='currentCoffee']" ) ).getText().equals( "9" ) );
+        assertTrue( !before.equals( after ) );
     }
 
     /**
@@ -245,6 +250,7 @@ public class MakeCoffeeTest extends SeleniumTest {
      */
     @Test
     public void testInvalidMakeCoffee () throws Exception {
+
         makeCoffee( "Coffee", 60, 0, 3, 7, 2, 59, "Error while making recipe" );
         makeCoffee( "Coffee", 60, 5, 0, 7, 2, -1, "Error while making recipe" );
         makeInvalidCoffee( "Coffee", 5, 2, 3, 4, 2, 5.5, "Non-Integer Value Entered." );
