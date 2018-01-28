@@ -26,7 +26,7 @@ angular.module('myApp').controller('AddRecipeController', ['$scope', 'AddRecipeS
     function submit() {
     		addRecipe(self.recipe);
         
-        reset();
+       reset();
     }
  
  

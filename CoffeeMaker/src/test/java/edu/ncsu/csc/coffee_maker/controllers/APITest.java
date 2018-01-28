@@ -1,6 +1,7 @@
 package edu.ncsu.csc.coffee_maker.controllers;
 
 import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -91,7 +92,7 @@ public class APITest {
         recipe.setChocolate( 6 );
         recipe.setCoffee( 6 );
         recipe.setMilk( 6 );
-        recipe.setName( "mocha" );
+        recipe.setName( "r1" );
         recipe.setPrice( 6 );
         recipe.setSugar( 6 );
         mvc.perform( post( "/api/v1/recipes" ).contentType( MediaType.APPLICATION_JSON )
@@ -102,49 +103,18 @@ public class APITest {
         duplicate.setChocolate( 6 );
         duplicate.setCoffee( 6 );
         duplicate.setMilk( 6 );
-        duplicate.setName( "mocha" );
+        duplicate.setName( "r1" );
         duplicate.setPrice( 6 );
         duplicate.setSugar( 6 );
         mvc.perform( post( "/api/v1/recipes" ).contentType( MediaType.APPLICATION_JSON )
                 .content( new Gson().toJson( duplicate ) ) ).andExpect( status().is4xxClientError() );
-
-        final Recipe recipe2 = new Recipe();
-        recipe2.setChocolate( 6 );
-        recipe2.setCoffee( 6 );
-        recipe2.setMilk( 6 );
-        recipe2.setName( "cappuccino" );
-        recipe2.setPrice( 6 );
-        recipe2.setSugar( 6 );
-        mvc.perform( post( "/api/v1/recipes" ).contentType( MediaType.APPLICATION_JSON )
-                .content( new Gson().toJson( recipe2 ) ) ).andExpect( status().isOk() );
-
-        final Recipe recipe3 = new Recipe();
-        recipe3.setChocolate( 6 );
-        recipe3.setCoffee( 6 );
-        recipe3.setMilk( 6 );
-        recipe3.setName( "espresso" );
-        recipe3.setPrice( 6 );
-        recipe3.setSugar( 6 );
-        mvc.perform( post( "/api/v1/recipes" ).contentType( MediaType.APPLICATION_JSON )
-                .content( new Gson().toJson( recipe3 ) ) ).andExpect( status().isOk() );
-
-        // adding a 4th recipe - error
-        final Recipe recipe4 = new Recipe();
-        recipe4.setChocolate( 6 );
-        recipe4.setCoffee( 6 );
-        recipe4.setMilk( 6 );
-        recipe4.setName( "a" );
-        recipe4.setPrice( 6 );
-        recipe4.setSugar( 6 );
-        mvc.perform( post( "/api/v1/recipes" ).contentType( MediaType.APPLICATION_JSON )
-                .content( new Gson().toJson( recipe4 ) ) ).andExpect( status().is5xxServerError() );
 
         // adding an invalid recipe - error
         final Recipe invalid = new Recipe();
         invalid.setChocolate( -6 );
         invalid.setCoffee( 6 );
         invalid.setMilk( 6 );
-        invalid.setName( "latte" );
+        invalid.setName( "invalid" );
         invalid.setPrice( 6 );
         invalid.setSugar( 6 );
         mvc.perform( post( "/api/v1/recipes" ).contentType( MediaType.APPLICATION_JSON )
@@ -156,12 +126,31 @@ public class APITest {
     }
 
     /**
-     * Test deleting recipe
+     * Test deleting a recipe
      *
      * @throws Exception
      */
     @Test
     public void testDeleteRecipe () throws Exception {
+        mvc.perform( get( "/api/v1/recipes/r1" ) ).andExpect( status().isOk() );
+        mvc.perform( get( "/api/v1/recipes/dne" ) ).andExpect( status().is4xxClientError() );
+
+        mvc.perform( delete( "/api/v1/recipes/r1" ) ).andExpect( status().isOk() );
+        mvc.perform( get( "/api/v1/recipes/r1" ) ).andExpect( status().is4xxClientError() );
+
+        mvc.perform( delete( "/api/v1/recipes/r1" ) ).andExpect( status().is4xxClientError() );
 
     }
+
+    /**
+     * Test get all recipes
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testGetRecipe () throws Exception {
+        mvc.perform( get( "/api/v1/recipes/" ) ).andExpect( status().isOk() );
+
+    }
+
 }
