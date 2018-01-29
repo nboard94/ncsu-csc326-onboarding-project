@@ -11,8 +11,9 @@ angular.module('myApp').controller('AddRecipeController', ['$scope', 'AddRecipeS
     		$scope.success = false;
     		$scope.failure = false;
     		AddRecipeService.addRecipe(recipe)
-            .then(
-            		$scope.success = true,
+            .then(function(s) {
+                $scope.success = true;
+                reset(); },
             function(errResponse){
             		$scope.failure = true;
             		$scope.success = false;
@@ -26,7 +27,7 @@ angular.module('myApp').controller('AddRecipeController', ['$scope', 'AddRecipeS
     function submit() {
     		addRecipe(self.recipe);
         
-       reset();
+
     }
  
  
