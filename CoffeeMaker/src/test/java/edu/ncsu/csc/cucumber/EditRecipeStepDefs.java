@@ -18,8 +18,7 @@ import edu.ncsu.csc.coffee_maker.models.persistent.Recipe;
 import edu.ncsu.csc.test_utils.SharedRecipeData;
 
 /**
- * Step Defs (Cucumber) for interacting with the Recipe model to ensure it is
- * appropriately tested.
+ * Selenium + Cucumber tests
  *
  * @author Kai Presler-Marshall
  * @author Sarah Elder
@@ -207,51 +206,71 @@ public class EditRecipeStepDefs {
     }
 
     /**
-     * Edit recipe
+     * Edit the most recently referenced recipe and give it the new parameters
+     * provided
      *
-     * @throws Exception
-     *
+     * @param cost
+     *            New cost of the Recipe
+     * @param coffeeAmt
+     *            New amount of Coffee needed for the Recipe
+     * @param milkAmt
+     *            New amount of Milk needed for the Recipe
+     * @param sugarAmt
+     *            New amount of Sugar needed for the Recipe
+     * @param chocolateAmt
+     *            New amount of Chocolate needed for the Recipe
      */
     @When ( "^I edited that recipe to have cost: (\\d+); and ingredients: (\\d+) coffee, (\\d+) milk, (\\d+) sugar, (\\d+) chocolate$" )
-    private void editRecipe ( final String recipeName, final int price, final int amtCoffee, final int amtMilk,
-            final int amtSugar, final int amtChocolate, final String expectedMessage ) throws Exception {
-        createRecipe( recipeName, price, amtCoffee, amtMilk, amtSugar, amtChocolate );
+    private void editRecipe ( final int price, final int amtCoffee, final int amtMilk, final int amtSugar,
+            final int amtChocolate ) throws Exception {
+        createRecipe( "Coffee", price, amtCoffee, amtMilk, amtSugar, amtChocolate );
 
         driver.get( baseUrl + "" );
         driver.findElement( By.linkText( "Edit a Recipe" ) ).click();
 
-        selectRecipe( recipeName );
+        selectRecipe( "Coffee" );
 
         // Enter the recipe information
         driver.findElement( By.name( "name" ) ).clear();
         driver.findElement( By.name( "name" ) ).sendKeys( "Coffee" );
         driver.findElement( By.name( "price" ) ).clear();
-        driver.findElement( By.name( "price" ) ).sendKeys( "50" );
+        driver.findElement( By.name( "price" ) ).sendKeys( price + "" );
         driver.findElement( By.name( "coffee" ) ).clear();
-        driver.findElement( By.name( "coffee" ) ).sendKeys( "3" );
+        driver.findElement( By.name( "coffee" ) ).sendKeys( amtCoffee + "" );
         driver.findElement( By.name( "milk" ) ).clear();
-        driver.findElement( By.name( "milk" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "milk" ) ).sendKeys( amtMilk + "" );
         driver.findElement( By.name( "sugar" ) ).clear();
-        driver.findElement( By.name( "sugar" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "sugar" ) ).sendKeys( amtSugar + "" );
         driver.findElement( By.name( "chocolate" ) ).clear();
-        driver.findElement( By.name( "chocolate" ) ).sendKeys( "0" );
+        driver.findElement( By.name( "chocolate" ) ).sendKeys( amtChocolate + "" );
 
         // Submit the recipe.
         driver.findElement( By.cssSelector( "input[type=\"submit\"]" ) ).click();
 
         // Make sure the proper message was displayed.
         final String src = driver.getPageSource();
-        Assert.assertTrue( src.contains( expectedMessage ) );
+        Assert.assertTrue( src.contains( "Recipe Edited" ) );
     }
 
     /**
-     * Edit recipe
+     * Unsuccessfully attempt to edit the most recently referenced recipe with
+     * the new parameters provided.
      *
-     * @throws Exception
-     *
+     * @param cost
+     *            New cost of the Recipe
+     * @param coffeeAmt
+     *            New amount of Coffee needed for the Recipe
+     * @param milkAmt
+     *            New amount of Milk needed for the Recipe
+     * @param sugarAmt
+     *            New amount of Sugar needed for the Recipe
+     * @param chocolateAmt
+     *            New amount of Chocolate needed for the Recipe
      */
-    @When ( "^I invalidly edited that recipe to have cost: (\\d+); and ingredients: (\\d+) coffee, (\\d+) milk, (\\d+) sugar, (\\d+) chocolate$" )
-    public void testInvalidRecipe1 () throws Exception {
+    @When ( "^I invalidly editted that recipe to have cost: (.+); and ingredients: (.+) coffee, (.+) milk, (.+) sugar, (.+) chocolate$" )
+    public void invalidEditRecipe ( final String cost, final String coffeeAmt, final String milkAmt,
+            final String sugarAmt, final String chocolateAmt ) throws Exception {
+
         driver.get( baseUrl + "" );
         driver.findElement( By.linkText( "Edit a Recipe" ) ).click();
 
@@ -260,15 +279,15 @@ public class EditRecipeStepDefs {
         driver.findElement( By.name( "name" ) ).clear();
         driver.findElement( By.name( "name" ) ).sendKeys( "Coffee" );
         driver.findElement( By.name( "price" ) ).clear();
-        driver.findElement( By.name( "price" ) ).sendKeys( "a" );
+        driver.findElement( By.name( "price" ) ).sendKeys( cost );
         driver.findElement( By.name( "coffee" ) ).clear();
-        driver.findElement( By.name( "coffee" ) ).sendKeys( "3" );
+        driver.findElement( By.name( "coffee" ) ).sendKeys( coffeeAmt );
         driver.findElement( By.name( "milk" ) ).clear();
-        driver.findElement( By.name( "milk" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "milk" ) ).sendKeys( milkAmt );
         driver.findElement( By.name( "sugar" ) ).clear();
-        driver.findElement( By.name( "sugar" ) ).sendKeys( "1" );
+        driver.findElement( By.name( "sugar" ) ).sendKeys( sugarAmt );
         driver.findElement( By.name( "chocolate" ) ).clear();
-        driver.findElement( By.name( "chocolate" ) ).sendKeys( "0" );
+        driver.findElement( By.name( "chocolate" ) ).sendKeys( chocolateAmt );
 
         // Submit the recipe.
         driver.findElement( By.cssSelector( "input[type=\"submit\"]" ) ).click();
