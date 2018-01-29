@@ -158,8 +158,8 @@ public class RecipeBook {
      *            edited recipe
      * @return name of edited recipe
      */
-    public synchronized String editRecipe ( final int recipeToEdit, final Recipe newRecipe ) {
-        final Recipe r = recipesList.get( recipeToEdit );
+    public synchronized String editRecipe ( final long recipeToEdit, final Recipe newRecipe ) {
+        final Recipe r = recipesList.get( (int) recipeToEdit );
 
         if ( r != null ) {
 

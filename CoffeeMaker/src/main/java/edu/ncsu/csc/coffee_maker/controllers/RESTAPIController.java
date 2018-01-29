@@ -142,6 +142,31 @@ public class RESTAPIController {
     }
 
     /**
+     * REST API method to provide POST access to the Recipe model. This is used
+     * to edit an existing Recipe by automatically converting the JSON
+     * RequestBody provided to a Recipe object. Invalid JSON will fail.
+     *
+     * @param recipe
+     *            The valid Recipe to be saved.
+     * @return ResponseEntity indicating success if the Recipe could be saved to
+     *         the inventory, or an error if it could not be
+     */
+    @PostMapping ( BASE_PATH + "/recipes/edit" )
+    public ResponseEntity editRecipe ( @RequestBody final Recipe recipe ) {
+        try {
+            if ( null == Application.getCoffeeMaker().getRecipeBook().editRecipe( recipe.getId() - 1, recipe ) ) {
+                return new ResponseEntity( "Recipe with the name " + recipe.getName() + " does not exist",
+                        HttpStatus.CONFLICT );
+            }
+            return new ResponseEntity<String>( "{\"result\":\"success\"}", HttpStatus.OK );
+        }
+        catch ( final Exception e ) {
+            return new ResponseEntity( "Insufficient space in recipe book for recipe " + recipe.getName(),
+                    HttpStatus.INSUFFICIENT_STORAGE );
+        }
+    }
+
+    /**
      * REST API method to allow deleting a Recipe from the CoffeeMaker's
      * Inventory, by making a DELETE request to the API endpoint and indicating
      * the recipe to delete (as a path variable)

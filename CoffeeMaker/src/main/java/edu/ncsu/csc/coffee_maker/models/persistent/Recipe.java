@@ -21,7 +21,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Table ( name = "recipes" )
 public class Recipe {
 
-    private Long    id;
+    private long    id;
 
     @NotNull
     private String  name;
@@ -62,7 +62,7 @@ public class Recipe {
     @Id
     @GeneratedValue ( generator = "increment" )
     @GenericGenerator ( name = "increment", strategy = "increment" )
-    public Long getId () {
+    public long getId () {
         return id;
     }
 
@@ -73,7 +73,7 @@ public class Recipe {
      *            the ID
      */
     @SuppressWarnings ( "unused" )
-    private void setId ( final Long id ) {
+    private void setId ( final long id ) {
         this.id = id;
     }
 

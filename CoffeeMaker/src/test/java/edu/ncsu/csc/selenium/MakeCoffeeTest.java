@@ -137,6 +137,35 @@ public class MakeCoffeeTest extends SeleniumTest {
     }
 
     /**
+     * Testing if inventory gets updating after making valid coffee
+     */
+
+    // @Test
+    // public void testInventory () throws Exception {
+    // driver.get( baseUrl + "" );
+    // driver.findElement( By.linkText( "Update Inventory" ) ).click();
+    //
+    // final WebDriverWait wait = new WebDriverWait( driver, 30 );
+    // wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath(
+    // "//span[@id='currentCoffee']" ) ) );
+    //
+    // final String before = driver.findElement( By.xpath(
+    // "//span[@id='currentCoffee']" ) ).getText();
+    //
+    // makeCoffee( "Coffee", 6, 6, 6, 6, 6, 6, "Coffee was made" );
+    //
+    // driver.findElement( By.linkText( "Home" ) ).click();
+    // driver.findElement( By.linkText( "Update Inventory" ) ).click();
+    //
+    // wait.until( ExpectedConditions.visibilityOfElementLocated( By.xpath(
+    // "//span[@id='currentCoffee']" ) ) );
+    // final String after = driver.findElement( By.xpath(
+    // "//span[@id='currentCoffee']" ) ).getText();
+    //
+    // assertTrue( !before.equals( after ) );
+    // }
+
+    /**
      * Create invalid coffee
      */
     private void makeInvalidCoffee ( final String recipeName, final int price, final int amtCoffee, final int amtMilk,
@@ -232,6 +261,7 @@ public class MakeCoffeeTest extends SeleniumTest {
      */
     @Test
     public void testInvalidMakeCoffee () throws Exception {
+
         makeCoffee( "Coffee", 60, 0, 3, 7, 2, 59, "Error while making recipe" );
         makeCoffee( "Coffee", 60, 5, 0, 7, 2, -1, "Error while making recipe" );
         makeInvalidCoffee( "Coffee", 5, 2, 3, 4, 2, 5.5, "Non-Integer Value Entered." );
